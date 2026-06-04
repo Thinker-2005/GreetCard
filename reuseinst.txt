@@ -1,0 +1,51 @@
+Searched for "GreetingCard"
+Searched for "namespace"
+Searched for "GreetingCard"
+Searched for "namespace"
+Searched for "applicationId"
+Viewed settings.gradle.kts:1-27
+Viewed build.gradle.kts:1-58
+Viewed AndroidManifest.xml:1-27
+Viewed strings.xml:1-3
+
+To reuse this folder structure as a template for a new project without using Android Studio, you will need to manually rename some directories and edit a few configuration files to reflect your new app's name and package identifier (e.g., changing `com.example.greetingcard` to `com.yourcompany.newapp`).
+
+Here is a comprehensive checklist of everything you need to change when you duplicate this folder:
+
+### 1. Folder Structure Changes (Renaming)
+*   **Root Folder**: Rename the root directory from `GreetingCard` to your new project name (e.g., `NewApp`).
+*   **Source Code Packages**: You need to rename the nested directories that match the package name `com/example/greetingcard`. Create the new folder structure for your package (e.g., `com/yourcompany/newapp`) and move the `.kt` files there. You'll need to do this in three places if they exist:
+    *   `app/src/main/java/com/example/greetingcard/` -> rename to match your new package.
+    *   `app/src/test/java/com/example/greetingcard/` -> (If it exists) rename to match your new package.
+    *   `app/src/androidTest/java/com/example/greetingcard/` -> (If it exists) rename to match your new package.
+
+### 2. Configuration File Edits
+*   **`settings.gradle.kts`**: 
+    *   Update the root project name: 
+        Change `rootProject.name = "Greeting Card"` to `rootProject.name = "New App Name"`
+*   **`app/build.gradle.kts`**: 
+    *   Update the namespace (used for generated R and BuildConfig classes):
+        Change `namespace = "com.example.greetingcard"` to your new package name.
+    *   Update the application ID (the unique identifier on the Google Play Store):
+        Change `applicationId = "com.example.greetingcard"` to your new package name.
+*   **`app/src/main/res/values/strings.xml`**:
+    *   Update the name displayed on the user's phone screen:
+        Change `<string name="app_name">Greeting Card</string>` to your new app name.
+
+### 3. Source Code Edits
+*   **All `.kt` files** (like `MainActivity.kt`, `Theme.kt`, etc.):
+    *   At the very top of every Kotlin file, update the package declaration:
+        Change `package com.example.greetingcard` to `package com.yourcompany.newapp`
+
+### 4. Theme & Styling Edits (Optional but recommended)
+To keep your project clean, you should also rename the theme identifiers from "GreetingCard" to your new project name:
+*   **`app/src/main/res/values/themes.xml`**: 
+    *   Change `<style name="Theme.GreetingCard" ...>` to `<style name="Theme.NewAppName" ...>`
+*   **`app/src/main/AndroidManifest.xml`**: 
+    *   Find the `android:theme` attributes (there are usually two, one in `<application>` and one in `<activity>`) and change them from `@style/Theme.GreetingCard` to `@style/Theme.NewAppName`.
+*   **`app/src/main/java/.../ui/theme/Theme.kt`**:
+    *   Rename the composable function `fun GreetingCardTheme(...)` to `fun NewAppNameTheme(...)`.
+*   **`MainActivity.kt`**:
+    *   Update the import and the usage of `GreetingCardTheme` to your new `NewAppNameTheme`.
+
+If you miss any of these, the GitHub Actions build will likely fail complaining about mismatched package names or unresolved references, so it's a good idea to keep this checklist handy!
